@@ -1,26 +1,4 @@
-<?php
-  //creating connection to database
-$con=mysqli_connect("localhost","root","","dexters") or die(mysqli_error());
-  //check whether submit button is pressed or not
-if((isset($_POST['submit'])))
-{
-  //fetching and storing the form data in variables
-$Name = $con->real_escape_string($_POST['name']);
-$Email = $con->real_escape_string($_POST['email']);
-$subject = $con->real_escape_string($_POST['subject']);
-$text = $con->real_escape_string($_POST['text']);
-  //query to insert the variable data into the database
-$sql="INSERT INTO contact (name, email, subject, message) VALUES ('".$Name."','".$Email."', '".$subject."', '".$text."')";
-  //Execute the query and returning a message
-if(!$result = $con->query($sql)){
-die('Error occured [' . $conn->error . ']');
-}
-else
-   echo "<p align='center'> <font color=black>Thank you! We will get in touch with you soon.</font> </p><br><br>";
-}
 
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +73,7 @@ else
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item active"><a href="contact.php" class="nav-link">Contact</a></li>
+	          <li class="nav-item active"><a href="contact.html" class="nav-link">Contact</a></li>
 	          <li class="nav-item cta"><a href="blog.html" class="nav-link">Editor</a></li>
 
 
@@ -241,7 +219,7 @@ else
                 <li><a href="index.html" class="py-2 d-block">Home</a></li>
                 <li><a href="about.html" class="py-2 d-block">About</a></li>
 
-                <li><a href="contact.php" class="py-2 d-block">Contact</a></li>
+                <li><a href="contact.html" class="py-2 d-block">Contact</a></li>
 	 <li><a href="blog.html" class="py-2 d-block">Text Editor</a></li>
               </ul>
             </div>
