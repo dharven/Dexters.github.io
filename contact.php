@@ -1,0 +1,309 @@
+<?php
+  //creating connection to database
+$con=mysqli_connect("localhost","root","","dexters") or die(mysqli_error());
+  //check whether submit button is pressed or not
+if((isset($_POST['submit'])))
+{
+  //fetching and storing the form data in variables
+$Name = $con->real_escape_string($_POST['name']);
+$Email = $con->real_escape_string($_POST['email']);
+$subject = $con->real_escape_string($_POST['subject']);
+$text = $con->real_escape_string($_POST['text']);
+  //query to insert the variable data into the database
+$sql="INSERT INTO contact (name, email, subject, message) VALUES ('".$Name."','".$Email."', '".$subject."', '".$text."')";
+  //Execute the query and returning a message
+if(!$result = $con->query($sql)){
+die('Error occured [' . $conn->error . ']');
+}
+else
+   echo "<p align='center'> <font color=black>Thank you! We will get in touch with you soon.</font> </p><br><br>";
+}
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dexters</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,,500,600,700" rel="stylesheet">
+    <link rel="shortcut icon" href=" images/n.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/aos.css">
+
+    <link rel="stylesheet" href="css/ionicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+    #input {
+        position:relative; width:80%; left:0%;
+
+        border:solid 2px #379;
+        border-radius:0px;
+        color:black; margin:0px; padding:5px;
+    }
+
+
+    #captcha {
+        position:relative; width:100% height:200px;
+        background-color:rgba(40,90,120,0.15);
+        border-radius:4px;
+        padding:10px; margin:0px;
+    }
+    #output {
+        width:70%; left:10%;
+        position:relative;
+        border:solid 1px #379; border-radius:4px;
+        background-color:rgba(40,90,120,0.15);
+        padding:1px; margin-bottom:10px;
+        text-align:center;
+        display:none;
+    }
+    #captcha_container {
+        position:relative; background-color:rgba(40,90,120,0.3);
+        border-radius:4px;
+        padding:15px;
+    }
+    </style>
+  </head>
+  <body>
+
+	 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html">Dexters</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+	          <li class="nav-item active"><a href="contact.php" class="nav-link">Contact</a></li>
+	          <li class="nav-item cta"><a href="blog.html" class="nav-link">Editor</a></li>
+
+
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+    <div class="hero-wrap hero-wrap-2" style="background-image: url('images/tele.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-end justify-content-start">
+          <div class="col-md-8 ftco-animate text-center text-md-left mb-5">
+          	<p class="breadcrumbs mb-0"><span class="mr-3"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Contact</span></p>
+            <h1 class="mb-3 bread">Contact Us</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section contact-section ftco-degree-bg">
+      <div class="container">
+        <div class="row d-flex mb-5 contact-info">
+          <div class="col-md-12 mb-4">
+            <h2 class="h4">Contact Information</h2>
+          </div>
+          <div class="w-100"></div>
+          <div class="col-md-3">
+            <p><span>Address:</span> 12 Dexters complex Nr. Yogi petrol pump, Anand,Gujarat,India</p>
+          </div>
+          <div class="col-md-3">
+            <p><span>Phone:</span>+91 9429807262</p>
+          </div>
+          <div class="col-md-3">
+            <p><span>Email:</span>Dexters@gmail.com</p>
+          </div>
+          <div class="col-md-3">
+            <p><span>Website</span>Dexters.com</p>
+          </div>
+        </div>
+        <div class="row block-9">
+          <div class="col-md-6 pr-md-5">
+            <form class="form" action="" method="POST" id="captcha_form">
+              <div class="form-group">
+                <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+              </div>
+              <div class="form-group">
+                <textarea  name="text" cols="30" rows="7" class="form-control" placeholder="Message" required></textarea>
+              </div>
+
+
+              <div id="captcha_wrapper">
+                <br>
+                <p><strong>Captcha</strong></p>
+                <div id="captcha"></div>
+                <br>
+                <div>
+                <input type="text" id="input" placeholder="Insert Captcha" / required>
+              </div>
+                <br>
+
+                <div id="output">gg</div>
+                  <div id="captcha_container">
+                    <input type="checkbox" id="checked" onclick="validate();"/>
+                    I'm not a robot
+                  </div>
+                  <br>
+
+    </div>
+    <div class="form-group">
+                    <input type="submit" id="hi" value="Submit"  name="submit" class="btn btn-primary py-3 px-5">
+                  </div>
+            </form>
+
+          </div>
+
+	<div class="col-md-6">
+	    		<div class="col-md-6 ftco-animate img about-image" style="background-image: url(images/.jpg);">
+	    		</div>
+
+
+	<div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=anand&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://torrent9-fr.com"></a></div><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div>
+        </div>
+      </div>
+    </section>
+
+
+     <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+      	<div class="row mb-5 pb-5 align-items-center d-flex">
+      		<div class="col-md-6">
+      			<div class="heading-section heading-section-white ftco-animate">
+      				<span class="subheading">What are you waiting for!</span>
+	            <h2 style="font-size: 30px;">Start Using Dexters Today!</h2>
+	          </div>
+      		</div>
+      		<div class="col-md-3 ftco-animate">
+      			<div class="price">
+      				<span class="subheading">Starting at Only</span>
+      				<h3>₹0<span>/mo</span></h3>
+      			</div>
+      		</div>
+      		<div class="col-md-3 ftco-animate">
+      			<p class="mb-0"><a href="blog.html" class="btn btn-primary py-3 px-4">Start Using!</a></p>
+      		</div>
+      	</div>
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 bg-primary p-4">
+              <h2 class="ftco-heading-2">Dexters</h2>
+              <p>All your writing problems solved at one place, then what are you waiting for? Join us today for a better tomorrow and bright future.</p>
+              <ul class="ftco-footer-social list-unstyled mb-0">
+                <li class="ftco-animate"><a href="https://codepen.io/dharven123"><span class="icon-codepen"></span></a></li>
+                <li class="ftco-animate"><a href="https://www.linkedin.com/in/dharven-doshi-a497021b0/"><span class="icon-linkedin"></span></a></li>
+                <li class="ftco-animate"><a href="https://github.com/dharven"><span class="icon-github"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Services</h2>
+              <ul class="list-unstyled">
+                <li><a href="blog.html" class="py-2 d-block">Save</a></li>
+                <li><a href="#" class="py-2 d-block">Data privacy</a></li>
+                <li><a href="blog.html" class="py-2 d-block">Styling Features</a></li>
+                <li><a href="blog.html" class="py-2 d-block">Editors</a></li>
+                <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li>
+                <li><a href="#" class="py-2 d-block">Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+             <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Navigational</h2>
+              <ul class="list-unstyled">
+                <li><a href="index.html" class="py-2 d-block">Home</a></li>
+                <li><a href="about.html" class="py-2 d-block">About</a></li>
+
+                <li><a href="contact.php" class="py-2 d-block">Contact</a></li>
+	 <li><a href="blog.html" class="py-2 d-block">Text Editor</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">Office</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text">12 Dexters complex Nr. Yogi petrol pump, Anand,Gujarat,India</span></li>
+	                <li><span class="icon icon-phone"></span><span class="text">+91 9429807262</span></li>
+	                <li><span class="icon icon-envelope"></span><span class="text">dharven123@gmail.com</span></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This website is made with <i class="icon-heart" aria-hidden="true"></i> by <a>Dexters</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+  <script src="js/jquery.timepicker.min.js"></script>
+  <script src="js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="js/google-map.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+          function rand(captcha_str,fin){
+              captcha_str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+{}:,./;][=-";
+              fin=Math.floor(Math.random()*captcha_str.length);
+              for(let i=0; i<5; i++){
+                  fin+=captcha_str[Math.floor(Math.random()* 85)];
+              }
+              //console.log(captcha_str.length);
+              return fin;
+          }
+          var doc=document.getElementById("captcha");
+              doc.innerHTML=(rand());
+      </script>
+
+  </body>
+</html>
