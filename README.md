@@ -10,7 +10,7 @@ Dexters is an online free texteditor for your work, from styling to spelling, De
 
 ## What it does
 1)Gives you tons of free editing tools.
-2)real time spelling checker so that you don't make a mistake.
+2)Real time spelling checker so that you don't make a mistake.
 3)Can save instantly on your local computer.
 
 ## Live Demo
