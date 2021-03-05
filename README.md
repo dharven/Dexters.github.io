@@ -5,9 +5,8 @@ Dexters is an online free texteditor for your work, from styling to spelling, De
 1)HTML
 2)CSS
 3)JS
-4)JQUERY
-5)PHP
-6)MYSQL
+4)PHP
+5)MYSQL
 
 ## What it does
 1)Gives you tons of free editing tools.
